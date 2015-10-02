@@ -1,0 +1,6 @@
+jdbc.driverClassName = com.mysql.jdbc.Driver
+jdbc.url = jdbc:mysql://localhost:3306/myshowtestdb
+jdbc.username = root
+jdbc.password = honey
+hibernate.dialect = org.hibernate.dialect.MySQLDialect
+hibernate.show_sql = true

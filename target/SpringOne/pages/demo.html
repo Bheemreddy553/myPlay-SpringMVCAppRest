@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Spring MVC AngularJS demo</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+  <script>
+
+    var app = angular.module('myApp', []);
+
+    function MyController($scope, $http){
+
+      $scope.getPersonDataFromServer = function() {
+        $http({method: 'GET', url: 'persons'}).
+                success(function(data, status, headers, config) {
+                  console.log("data" + data);
+                  $scope.persons = data;
+                }).
+                error(function(data, status, headers, config) {
+                  // called asynchronously if an error occurs
+                  // or server returns response with an error status.
+                });
+
+      };
+    };
+  </script>
+</head>
+<body>
+<div data-ng-app="myApp">
+  <div data-ng-controller="MyController">
+    <button data-ng-click="getPersonDataFromServer()">Get Person data from server</button>
+
+    <table class="table">
+      <tr>
+        <th><a href="" ng-click="orderByField='name'; reverseSort = !reverseSort">ID</a>
+        </th>
+        <th><a href="" ng-click="orderByField='employees'; reverseSort = !reverseSort">NAme</a>
+        </th>
+        <th><a href="" ng-click="orderByField='headoffice'; reverseSort = !reverseSort">Country</a>
+        </th>
+      </tr>
+      <tr ng-repeat="person in persons | filter: searchKeyword | orderBy:orderByField:reverseSort">
+        <td>{{person.id}}        </td>
+        <td>{{person.name}}        </td>
+        <td>{{person.country}}        </td>
+
+      </tr>
+    </table>
+  </div>
+</div>
+</body>
+</html>
